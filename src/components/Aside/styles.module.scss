@@ -1,0 +1,103 @@
+.container {
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: start;
+  border-right: 2px solid #000;
+}
+
+.asideRowCategories {
+  form {
+    margin-left: 50px;
+    @media(max-width: 425px) {
+      margin-left: 0;
+    }
+  }
+  .categoriesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 18px;
+  }
+  .categoryContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    label {
+      font-size: 20px;
+    }
+    input {
+      width: 25px;
+      height: 25px;
+      border-radius: 3px;
+    }
+  }
+  margin-bottom: 50px;
+}
+
+.asideRowFilters {
+  width: 100%;
+  .filterPrice {
+    position: relative;
+    width: 100%;
+    h4 {
+      display: inline-block;
+      width: fit-content;
+      height: fit-content;
+      padding-inline: 8px;
+      font-weight: 400;
+      font-size: 20px;
+      position: absolute;
+      background-color: #fff;
+      left: 10px;
+      top: -12px;
+      z-index: 10;
+    }
+    &Inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    &Container {
+      border: 2px solid #000;
+      padding-top: 15px;
+      border-radius: 3px;
+      height: 250px;
+      width: 100%;
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding: 20px 5px 40px 5px;
+        input {
+          width: 250px;
+          @media (max-width: 340px) {
+            width: 200px;
+          }
+          height: 40px;
+          padding-left: 8px;
+          border: 2px solid #000;
+          border-radius: 5px;
+          font-size: 18px;
+          color: #000;
+          &::placeholder {
+            color: #000;
+          }
+        }
+        button {
+          margin-top: auto;
+          width: 150px;
+          font-size: 24px;
+          height: 50px;
+          padding-inline: 10px;
+          background: transparent;
+          border: 1px solid #000;
+          border-radius: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

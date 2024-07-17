@@ -1,0 +1,29 @@
+.button {
+    font-family: "Balsamiq Sans";
+    width: 150px;
+    font-size: 24px;
+    height: 50px;
+    padding-inline: 10px;
+    background: transparent;
+    border: 1px solid #000;
+    border-radius: 20px;
+    cursor: pointer;
+    &:active {
+        backdrop-filter: brightness(0.9);
+    }
+    @media (max-width: 768px) {
+        width: 120px;
+        font-size: 18px;
+    }
+    @media(max-width: 550px) {
+        width: 90px;
+        font-size: 16px;
+    }
+    @media(max-width: 400px) {
+        width: 80px;
+        font-size: 14px;
+    }
+    @media(max-width: 340px) {
+        width: unset;
+    }
+}

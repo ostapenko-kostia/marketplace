@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Balsamiq Sans", sans-serif;
+}
+
+@font-face {
+  font-family: "Balsamiq Sans";
+  font-weight: 700;
+  src: url("/fonts/BalsamiqSans-Bold.woff2") format(woff2);
+}
+
+@font-face {
+  font-family: "Balsamiq Sans";
+  font-weight: 400;
+  src: url("/fonts/BalsamiqSans-Regular.woff2") format(woff2);
+}
+
+body {
+  font-weight: 400;
+}
+
+.hidden-mobile {
+  display: block;
+}
+
+.shown-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
+  .shown-mobile {
+    display: block;
+  }
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.page {
+  overflow-y: scroll;
+}
+
+.without-border {
+  border: none !important;
+}

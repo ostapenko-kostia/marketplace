@@ -1,0 +1,13 @@
+.container {
+  padding-inline: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 100px;
+  @media (max-width: 1170px) {
+    gap: 30px;
+  }
+  @media(max-width: 890px) {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,28 @@
+.container {
+    padding-top: 15px;
+    width: fit-content;
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.title {
+    font-size: 90px;
+}
+
+.subtitle {
+    font-size: 32px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-size: 20px;
+    @media(max-width: 430px) {
+        font-size: 16px;
+        white-space: wrap;
+    }
+}

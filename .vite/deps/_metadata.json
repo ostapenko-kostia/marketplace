@@ -1,0 +1,58 @@
+{
+  "hash": "fc8fdc88",
+  "configHash": "9a7eac41",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "6ad9a580",
+  "optimized": {
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "43385127",
+      "needsInterop": false
+    },
+    "mobx": {
+      "src": "../../node_modules/mobx/dist/mobx.esm.js",
+      "file": "mobx.js",
+      "fileHash": "460620a4",
+      "needsInterop": false
+    },
+    "mobx-react-lite": {
+      "src": "../../node_modules/mobx-react-lite/es/index.js",
+      "file": "mobx-react-lite.js",
+      "fileHash": "658cb1df",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "588db4ce",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "715cc1d5",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "f1fea99a",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-TNTPHDQH": {
+      "file": "chunk-TNTPHDQH.js"
+    },
+    "chunk-32E4H3EV": {
+      "file": "chunk-32E4H3EV.js"
+    },
+    "chunk-ZXA4EW2E": {
+      "file": "chunk-ZXA4EW2E.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
+}
