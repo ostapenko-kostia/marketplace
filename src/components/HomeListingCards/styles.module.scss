@@ -1,8 +1,8 @@
 .container {
   padding-inline: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 100px;
+  flex-wrap: wrap;
   @media (max-width: 1170px) {
     gap: 30px;
   }
