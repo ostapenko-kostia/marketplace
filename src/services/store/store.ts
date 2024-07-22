@@ -53,17 +53,17 @@ export default class Store {
   }
 
   async checkAuth() {
-    try {
-      const response = await axios.get<AuthResponse>(
-        `${BASE_URL}/api/auth/refresh`,
-        { withCredentials: true }
-      );
-      console.log(response);
-      localStorage.setItem("token", response.data.accessToken);
-      this.setAuth(true);
-      this.setUser(response.data.user);
-    } catch (e) {
-      console.log(e);
-    }
+    // try {
+    //   const response = await axios.get<AuthResponse>(
+    //     `${BASE_URL}/api/auth/refresh`,
+    //     { withCredentials: true }
+    //   );
+    //   console.log(response);
+    //   localStorage.setItem("token", response.data.accessToken);
+    //   this.setAuth(true);
+    //   this.setUser(response.data.user);
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
 }
