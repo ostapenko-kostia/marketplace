@@ -1,15 +1,22 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.scss";
-import { QueryClient, QueryClientProvider } from "react-query";
+import Store from "./services/store/store.ts";
 
-const queryClient = new QueryClient();
+const store = new Store();
+
+interface State {
+  store: Store;
+}
+
+const StoreContext = createContext<State>({ store });
+export const useStore = () => useContext(StoreContext);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+    <StoreContext.Provider value={{ store }}>
       <App />
-    </QueryClientProvider>
+    </StoreContext.Provider>
   </React.StrictMode>
 );

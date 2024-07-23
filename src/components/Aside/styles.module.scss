@@ -9,10 +9,6 @@
 
 .asideRowCategories {
   form {
-    margin-left: 50px;
-    @media(max-width: 425px) {
-      margin-left: 0;
-    }
   }
   .categoriesContainer {
     display: flex;

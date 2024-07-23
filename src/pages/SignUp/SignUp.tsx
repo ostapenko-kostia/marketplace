@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 import { useState } from "react";
-import { useMutation } from "react-query";
-import { AuthService } from "../../services/auth.service";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../main";
 
 function SignUp() {
   const [email, setEmail] = useState<string>("");
@@ -10,14 +10,7 @@ function SignUp() {
   const [last_name, setLastName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { mutateAsync: registerAsync } = useMutation(
-    "register",
-    () => AuthService.register(first_name, last_name, email, password),
-    {
-      onError: (error) => console.error(error),
-      onSuccess: (data) => console.log(data),
-    }
-  );
+  const { store } = useStore();
 
   return (
     <section className={style.container}>
@@ -27,7 +20,7 @@ function SignUp() {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            registerAsync();
+            store.register(first_name, last_name, email, password);
           }}
         >
           <div className={style.firstNameContainer}>
@@ -87,4 +80,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default observer(SignUp);

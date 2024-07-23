@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TypeCategories } from "./interfaces";
 import { CategoriesContext } from "./context/CategoriesContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -9,6 +9,7 @@ import Layout from "./components/Layout/Layout";
 import LogIn from "./pages/LogIn/LogIn";
 import SignUp from "./pages/SignUp/SignUp";
 import ListingPage from "./pages/ListingPage/ListingPage";
+import { useStore } from "./main";
 
 // hi
 
@@ -52,6 +53,13 @@ function App() {
     "Sports and Outdoors",
     "Other",
   ]);
+
+  const {store} = useStore();
+
+  useEffect(()=>{
+    store.checkAuth(localStorage.getItem('refresh-token'))
+  },[])
+
   return (
     <CategoriesContext.Provider value={{ categories, setCategories }}>
       <RouterProvider router={router} />

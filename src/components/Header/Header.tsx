@@ -6,6 +6,8 @@ import styles from "./styles.module.scss";
 import Modal from "../Modal/Modal";
 import { Link } from "react-router-dom";
 import Home from "../../pages/Home/Home";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../main";
 
 interface Props {
   page: ReactElement;
@@ -13,6 +15,8 @@ interface Props {
 
 function Header({ page }: Props) {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+
+  const { store } = useStore();
 
   return (
     <>
@@ -37,9 +41,9 @@ function Header({ page }: Props) {
           )}
 
           <Search shownMobile={false} placeholder="I am looking for..." />
-          {false ? (
+          {store.isAuth ? (
             <div className={styles.welcomeContainer}>
-              Welcome, {`{first_name}`}!
+              Welcome, {store.user.first_name}!
             </div>
           ) : (
             <AuthButtons />
@@ -54,4 +58,4 @@ function Header({ page }: Props) {
   );
 }
 
-export default Header;
+export default observer(Header);
