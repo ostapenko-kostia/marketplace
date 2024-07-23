@@ -3,13 +3,10 @@ import style from "./styles.module.scss";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { AuthService } from "../../services/auth.service";
-import { useAuth } from "../../providers/AuthProvider";
 
 function LogIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
-  const { setUser } = useAuth();
 
   const { mutateAsync: loginAsync } = useMutation(
     "login",
