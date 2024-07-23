@@ -1,14 +1,25 @@
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
-import { useContext, useState } from "react";
-import { Context } from "../../App";
-import { observer } from "mobx-react-lite";
+import { useState } from "react";
+import { useMutation } from "react-query";
+import { AuthService } from "../../services/auth.service";
+import { useAuth } from "../../providers/AuthProvider";
 
 function LogIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { store } = useContext(Context);
+  const { setUser } = useAuth();
+
+  const { mutateAsync: loginAsync } = useMutation(
+    "login",
+    () => AuthService.login(email, password),
+    {
+      onError: (error) => console.error(error),
+      onSuccess: (data) => console.log(data),
+    }
+  );
+
   return (
     <section className={style.container}>
       <h2 className={style.title}>Log In</h2>
@@ -17,7 +28,7 @@ function LogIn() {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            store.login(email, password);
+            loginAsync();
           }}
         >
           <div className={style.emailContainer}>
@@ -55,4 +66,4 @@ function LogIn() {
   );
 }
 
-export default observer(LogIn)
+export default LogIn;

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { TypeCategories } from "./interfaces";
 import { CategoriesContext } from "./context/CategoriesContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -9,7 +9,6 @@ import Layout from "./components/Layout/Layout";
 import LogIn from "./pages/LogIn/LogIn";
 import SignUp from "./pages/SignUp/SignUp";
 import ListingPage from "./pages/ListingPage/ListingPage";
-import Store from "./services/store/store";
 
 // hi
 
@@ -42,14 +41,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-const store = new Store();
-
-interface State {
-  store: Store;
-}
-
-export const Context = createContext<State>({ store });
-
 function App() {
   const [categories, setCategories] = useState<TypeCategories[]>([
     "Electronics",
@@ -61,19 +52,10 @@ function App() {
     "Sports and Outdoors",
     "Other",
   ]);
-  const { store } = useContext(Context);
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      store.checkAuth();
-    }
-  }, []);
-
   return (
-    <Context.Provider value={{ store }}>
-      <CategoriesContext.Provider value={{ categories, setCategories }}>
-        <RouterProvider router={router} />
-      </CategoriesContext.Provider>
-    </Context.Provider>
+    <CategoriesContext.Provider value={{ categories, setCategories }}>
+      <RouterProvider router={router} />
+    </CategoriesContext.Provider>
   );
 }
 
