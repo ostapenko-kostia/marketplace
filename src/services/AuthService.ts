@@ -11,14 +11,14 @@ export default class AuthService {
   }
   
   static async register(
-    first_name: string,
-    last_name: string,
+    firstName: string,
+    lastName: string,
     email: string,
     password: string
   ): Promise<void> {
     return $api.post("api/auth/register", {
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       email,
       password,
     });

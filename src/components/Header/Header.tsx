@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../main";
+import { toJS } from "mobx";
 
 interface Props {
   page: ReactElement;
@@ -43,7 +44,7 @@ function Header({ page }: Props) {
           <Search shownMobile={false} placeholder="I am looking for..." />
           {store.isAuth ? (
             <div className={styles.welcomeContainer}>
-              Welcome, {store.user.first_name}!
+              Welcome, {toJS(store.user).firstName}!
             </div>
           ) : (
             <AuthButtons />

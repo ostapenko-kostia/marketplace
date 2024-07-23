@@ -10,6 +10,7 @@ import LogIn from "./pages/LogIn/LogIn";
 import SignUp from "./pages/SignUp/SignUp";
 import ListingPage from "./pages/ListingPage/ListingPage";
 import { useStore } from "./main";
+import RequireAuth from "./hoc/RequireAuth";
 
 // hi
 
@@ -22,7 +23,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/create",
-    element: <Layout page={<CreateLisiting />} />,
+    element: (
+      <Layout
+        page={
+          <RequireAuth>
+            <CreateLisiting />
+          </RequireAuth>
+        }
+      />
+    ),
   },
   {
     path: "/log-in",
@@ -54,11 +63,11 @@ function App() {
     "Other",
   ]);
 
-  const {store} = useStore();
+  const { store } = useStore();
 
-  useEffect(()=>{
-    store.checkAuth(localStorage.getItem('refresh-token'))
-  },[])
+  useEffect(() => {
+    store.checkAuth(localStorage.getItem("refresh-token"));
+  }, []);
 
   return (
     <CategoriesContext.Provider value={{ categories, setCategories }}>

@@ -26,22 +26,22 @@ export default class Store {
       localStorage.setItem("access-token", response.data.access_token);
       localStorage.setItem("refresh-token", response.data.refresh_token);
       this.setAuth(true);
-      this.setUser(response.data.user);
+      this.setUser(response.data.userDetails);
     } catch (error) {
       console.error(error);
     }
   }
 
   async register(
-    first_name: string,
-    last_name: string,
+    firstName: string,
+    lastName: string,
     email: string,
     password: string
   ) {
     try {
       const response = await AuthService.register(
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         password
       );
@@ -61,7 +61,7 @@ export default class Store {
         );
         localStorage.setItem("access-token", response.data.access_token);
         this.setAuth(true);
-        this.setUser(response.data.user);
+        this.setUser(response.data.userDetails);
       } catch (error) {
         console.error(error);
       }

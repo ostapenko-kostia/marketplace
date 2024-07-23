@@ -17,16 +17,17 @@ export interface IFilters {
 }
 
 export interface IUser {
-  first_name: string;
-  last_name: string;
+  id: number;
+  firstName: string;
+  lastName: string;
   email: string;
-  password: string;
+  role: string;
 }
 
 export interface AuthResponse {
   access_token: string;
   refresh_token: string;
-  user: IUser;
+  userDetails: IUser;
 }
 
 export interface IListing {
@@ -37,6 +38,4 @@ export interface IListing {
   price: number;
   location: string;
   description: string;
-  seller_name: IUser["first_name"];
-  seller_email: IUser["email"];
 }

@@ -6,8 +6,8 @@ import { useStore } from "../../main";
 
 function SignUp() {
   const [email, setEmail] = useState<string>("");
-  const [first_name, setFirstName] = useState<string>("");
-  const [last_name, setLastName] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const { store } = useStore();
@@ -20,13 +20,13 @@ function SignUp() {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            store.register(first_name, last_name, email, password);
+            store.register(firstName, lastName, email, password);
           }}
         >
           <div className={style.firstNameContainer}>
             <label htmlFor="sigin-firstName">First Name</label>
             <input
-              value={first_name}
+              value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
               type="text"
@@ -37,7 +37,7 @@ function SignUp() {
           <div className={style.lastNameContainer}>
             <label htmlFor="sigin-lastName">Last Name</label>
             <input
-              value={last_name}
+              value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
               type="text"
