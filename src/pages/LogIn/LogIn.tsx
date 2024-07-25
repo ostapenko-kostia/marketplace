@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 import { useState } from "react";
-import { useStore } from "../../main";
-import { observer } from "mobx-react-lite";
+import { useAuthStore } from "../../store/store";
 
 function LogIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { store } = useStore();
+  const { login } = useAuthStore();
 
   return (
     <section className={style.container}>
@@ -18,7 +17,7 @@ function LogIn() {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            store.login(email, password);
+            login(email, password);
           }}
         >
           <div className={style.emailContainer}>
@@ -56,4 +55,4 @@ function LogIn() {
   );
 }
 
-export default observer(LogIn);
+export default LogIn;

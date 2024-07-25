@@ -8,10 +8,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-  if (localStorage.getItem("access-token"))
-    config.headers.Authorization = `Bearer ${localStorage.getItem(
-      "access-token"
-    )}`;
+  if (localStorage.getItem("access-token")) config.headers.Authorization = `Bearer ${localStorage.getItem("access-token")}`;
   else config.headers.Authorization = "none";
 
   return config;
@@ -21,20 +18,14 @@ $api.interceptors.response.use(
   (config) => config,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status == 401 || error.response.status == 403) {
-      if (error.config && !originalRequest._isRetry) {
-        originalRequest._isRetry = true;
-        try {
-          const response = await axios.post(
-            `${API_URL}api/auth/refreshtoken`,
-            { token: localStorage.getItem("refresh-token") },
-            { withCredentials: true }
-          );
-          localStorage.setItem("access-token", response.data.access_token);
-          return $api.request(originalRequest);
-        } catch (error) {
-          console.error("no auth");
-        }
+    if (error.response.status == 401 && error.config && !originalRequest._isRetry && !error.config.url.includes("api/auth")) {
+      originalRequest._isRetry = true;
+      try {
+        const response = await axios.post(`${API_URL}api/auth/refreshtoken`, { token: localStorage.getItem("refresh-token") }, { withCredentials: true });
+        localStorage.setItem("access-token", response.data.access_token);
+        return $api.request(originalRequest);
+      } catch (error) {
+        // console.error("no auth");
       }
     }
     throw error;

@@ -9,7 +9,7 @@ interface Props {
 export default function HomeListingCards({listings}: Props) {
     return (
         <div className={style.container}>
-            {listings && listings.map((listing) => <HomeListingCard key={listing.id} listing={listing} />)}
+            {listings && listings.map((listing) => <HomeListingCard key={listing.listing_id} listing={listing} />)}
         </div>
     )
 }

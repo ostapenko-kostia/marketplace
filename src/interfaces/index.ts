@@ -31,11 +31,11 @@ export interface AuthResponse {
 }
 
 export interface IListing {
-  file?: string;
-  id: number;
+  listing_id: number;
   name: string;
   category: TypeCategories;
   price: number;
   location: string;
   description: string;
+  photo_ref?: string;
 }

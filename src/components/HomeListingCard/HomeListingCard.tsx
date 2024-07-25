@@ -9,7 +9,7 @@ interface Props {
 export default function HomeListingCard({ listing }: Props) {
   return (
     <div className={style.container}>
-      <Image image={listing?.file} alt="Listing Thumbnail" />
+      <Image image={listing?.photo_ref} alt="Listing Thumbnail" />
       <div className={style.info}>
         <h4 className={style.title}>{listing.name}</h4>
         <span className={style.price}><span className={style.green}>$</span>{listing.price}</span>

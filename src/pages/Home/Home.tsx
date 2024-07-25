@@ -5,39 +5,31 @@ import style from "./styles.module.scss";
 
 import Modal from "../../components/Modal/Modal";
 import { IListing } from "../../interfaces";
+import { useAuthStore } from "../../store/store";
 
-export default function Home() {
+interface Props {
+  allListings: IListing[] | undefined;
+  myListings: IListing[] | undefined;
+}
+
+export default function Home({ allListings, myListings }: Props) {
+  const { isAuth } = useAuthStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [listings] = useState<IListing[]>([
-    {
-      id: 1,
-      name: "Test",
-      category: "Other",
-      description: "sdf",
-      location: "test",
-      price: 1,
-      seller_email: "123@gmail.com",
-      seller_name: "test",
-    },
-  ]);
 
   return (
     <div className={style.layoutContainer}>
       <Aside className="hidden-mobile" />
-      <button
-        onClick={() => setIsOpen(true)}
-        className={`shown-mobile ${style.menuButton}`}
-      >
+      <button onClick={() => setIsOpen(true)} className={`shown-mobile ${style.menuButton}`}>
         <i className="fa-solid fa-bars"></i>
       </button>
       <div className={style.listings}>
         <div className={style.listingsLatest}>
-          <h3>Latest</h3>
-          <HomeListingCards listings={listings} />
+          <h3>All Listings</h3>
+          {allListings ? <HomeListingCards listings={allListings} /> : "No Listings Found"}
         </div>
         <div className={style.listingsMy}>
           <h3>My Listings</h3>
-          <HomeListingCards listings={listings} />
+          {myListings && isAuth ? <HomeListingCards listings={myListings} /> : "No listings found or you're not authorized"}
         </div>
       </div>
 
