@@ -10,7 +10,6 @@ import LogIn from "./pages/LogIn/LogIn";
 import SignUp from "./pages/SignUp/SignUp";
 import ListingPage from "./pages/ListingPage/ListingPage";
 import RequireAuth from "./hoc/RequireAuth";
-import { useGetAllListings, useGetMyListings } from "./hooks/useListings";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "./store/store";
 
@@ -19,17 +18,11 @@ import { useAuthStore } from "./store/store";
 // lol
 
 function App() {
-  // Auth
-  const { isAuth, checkAuth } = useAuthStore();
+  const { checkAuth } = useAuthStore();
   useEffect(() => {
     checkAuth(localStorage.getItem("refresh-token"));
   }, []);
 
-  // Listings
-  useGetAllListings();
-  useGetMyListings(isAuth);
-
-  // Others
   const queryClient = useQueryClient();
   const router = createBrowserRouter([
     {
