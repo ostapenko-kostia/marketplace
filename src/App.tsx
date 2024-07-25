@@ -19,17 +19,22 @@ import { useAuthStore } from "./store/store";
 // lol
 
 function App() {
+  // Auth
   const { isAuth, checkAuth } = useAuthStore();
+  useEffect(() => {
+    checkAuth(localStorage.getItem("refresh-token"));
+  }, []);
 
-  const { data: allListings } = useGetAllListings();
-  const { data: myListings } = useGetMyListings(isAuth);
+  // Listings
+  useGetAllListings();
+  useGetMyListings(isAuth);
 
+  // Others
   const queryClient = useQueryClient();
-
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout page={<Home allListings={allListings} myListings={myListings} />} />,
+      element: <Layout page={<Home />} />,
     },
     {
       path: "/create",
@@ -60,12 +65,7 @@ function App() {
       element: <Layout page={<NotFound />} />,
     },
   ]);
-
   const [categories, setCategories] = useState<TypeCategories[]>(["Electronics", "Fashion", "Home and Garden", "Automotive", "Toys and Games", "Health and Beauty", "Sports and Outdoors", "Other"]);
-
-  useEffect(() => {
-    checkAuth(localStorage.getItem("refresh-token"));
-  }, []);
 
   return (
     <CategoriesContext.Provider value={{ categories, setCategories }}>

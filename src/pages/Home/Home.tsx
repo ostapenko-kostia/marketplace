@@ -4,17 +4,15 @@ import HomeListingCards from "../../components/HomeListingCards/HomeListingCards
 import style from "./styles.module.scss";
 
 import Modal from "../../components/Modal/Modal";
-import { IListing } from "../../interfaces";
 import { useAuthStore } from "../../store/store";
+import { useGetAllListings, useGetMyListings } from "../../hooks/useListings";
 
-interface Props {
-  allListings: IListing[] | undefined;
-  myListings: IListing[] | undefined;
-}
-
-export default function Home({ allListings, myListings }: Props) {
+export default function Home() {
   const { isAuth } = useAuthStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  
+  const {data: allListings} = useGetAllListings()
+  const {data: myListings} = useGetMyListings(isAuth);
 
   return (
     <div className={style.layoutContainer}>
