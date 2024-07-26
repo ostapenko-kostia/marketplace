@@ -10,9 +10,9 @@ import { useGetAllListings, useGetMyListings } from "../../hooks/useListings";
 export default function Home() {
   const { isAuth } = useAuthStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  
-  const {data: allListings} = useGetAllListings()
-  const {data: myListings} = useGetMyListings(isAuth);
+
+  const { data: allListings, isLoading: isAllListingsLoading, isFetching: isAllListingsFetching } = useGetAllListings();
+  const { data: myListings, isLoading: isMyListingLoading, isFetching: isMyListingFetching } = useGetMyListings(isAuth);
 
   return (
     <div className={style.layoutContainer}>
@@ -23,15 +23,15 @@ export default function Home() {
       <div className={style.listings}>
         <div className={style.listingsLatest}>
           <h3>All Listings</h3>
-          {allListings ? <HomeListingCards listings={allListings} /> : "No Listings Found"}
+          {isAllListingsLoading || isAllListingsFetching ? "Loading..." : allListings ? <HomeListingCards listings={allListings} /> : "No Listings Found"}
         </div>
         <div className={style.listingsMy}>
           <h3>My Listings</h3>
-          {myListings && isAuth ? <HomeListingCards listings={myListings} /> : "No listings found or you're not authorized"}
+          {isMyListingLoading || isMyListingFetching ? "Loading..." : myListings && isAuth ? <HomeListingCards listings={myListings} /> : "No Listings Found or You`re not Authorized"}
         </div>
       </div>
 
-      <Modal isOpen={isOpen} close={() => setIsOpen(false)}>
+      <Modal title={<h2>Menu</h2>} isOpen={isOpen} close={() => setIsOpen(false)}>
         <Aside className="without-border" />
       </Modal>
     </div>

@@ -12,6 +12,7 @@ import ListingPage from "./pages/ListingPage/ListingPage";
 import RequireAuth from "./hoc/RequireAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "./store/store";
+import SearchPage from "./pages/Search/Search";
 
 // hi
 
@@ -54,6 +55,10 @@ function App() {
       element: <Layout page={<ListingPage />} />,
     },
     {
+      path: "/search",
+      element: <Layout page={<SearchPage />} />
+    },
+    {
       path: "*",
       element: <Layout page={<NotFound />} />,
     },
@@ -64,10 +69,10 @@ function App() {
     <CategoriesContext.Provider value={{ categories, setCategories }}>
       <button
         onClick={() => {
-          queryClient.invalidateQueries({ queryKey: ["allListings", "myListings"] });
+          queryClient.invalidateQueries();
         }}
       >
-        invalidate
+        refresh data
       </button>
       <RouterProvider router={router} />
     </CategoriesContext.Provider>

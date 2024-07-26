@@ -45,3 +45,15 @@
     right: 20px;
   }
 }
+
+.listingsSearch {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}

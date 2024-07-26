@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./styles.module.scss";
 import { useState } from "react";
 import { useAuthStore } from "../../store/store";
@@ -7,6 +7,7 @@ function LogIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const navigate = useNavigate();
   const { login } = useAuthStore();
 
   return (
@@ -17,31 +18,16 @@ function LogIn() {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            login(email, password);
+            login(email, password, () => navigate({ pathname: "/" }));
           }}
         >
           <div className={style.emailContainer}>
             <label htmlFor="sigin-email">Email</label>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              value={email}
-              id="signin-email"
-              required
-              placeholder="123@gmail.com"
-            />
+            <input onChange={(e) => setEmail(e.target.value)} type="email" value={email} id="signin-email" required placeholder="123@gmail.com" />
           </div>
           <div className={style.emailContainer}>
             <label htmlFor="sigin-password">Password</label>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              value={password}
-              autoComplete="on"
-              type="password"
-              id="signin-password"
-              placeholder="123456"
-            />
+            <input onChange={(e) => setPassword(e.target.value)} required value={password} autoComplete="on" type="password" id="signin-password" placeholder="123456" />
           </div>
           <button type="submit">Log in</button>
         </form>

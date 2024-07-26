@@ -10,10 +10,10 @@ export type TypeCategories =
   | null;
 
 export interface IFilters {
-  price: {
-    min: number;
-    max: number;
-  };
+  name?: string;
+  categories?: TypeCategories[];
+  min_price?: number;
+  max_price?: number;
 }
 
 export interface IUser {

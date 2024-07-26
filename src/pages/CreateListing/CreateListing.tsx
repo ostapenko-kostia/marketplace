@@ -23,7 +23,7 @@ export default function CreateLisiting() {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            queryClient.invalidateQueries({ queryKey: ["allListings", "myListings"] });
+            queryClient.invalidateQueries({ queryKey: ["allListings"] });
           }}
           className={style.form}
         >
