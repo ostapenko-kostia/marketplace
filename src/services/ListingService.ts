@@ -1,6 +1,5 @@
 import { IListing, TypeCategories } from "../interfaces";
 import $api from ".";
-import qs from "qs";
 
 interface ListingApiResponse {
   listings: IListing[];
@@ -32,14 +31,7 @@ export default class ListingService {
     if (minPriceP) params.minPrice = minPriceP;
     if (maxPriceP) params.maxPrice = maxPriceP;
 
-    return (
-      await $api.get<ListingApiResponse>("listing/search", {
-        params,
-        paramsSerializer: (params) => {
-          return qs.stringify(params, {arrayFormat: 'repeat'});
-        },
-      })
-    ).data.listings;
+    return (await $api.get<ListingApiResponse>("listing/search", { params })).data.listings;
   }
 
   static async deleteListing(listing_id: number) {
