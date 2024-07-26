@@ -45,6 +45,8 @@ export const useAuthStore = create<AuthState>((set) => ({
         // console.error(error);
       }
     } else {
+      localStorage.removeItem('access-token')
+      localStorage.removeItem('refresh-token')
       set({ user: {} as IUser });
       set({ isAuth: false });
     }
