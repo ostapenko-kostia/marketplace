@@ -36,5 +36,6 @@ export function useGetListingsByFilters(name: string | undefined, categories?: T
         return await ListingService.getByFilters(name, categories, min_price, max_price);
       } catch (e) {}
     },
+    staleTime: Infinity,
   });
 }

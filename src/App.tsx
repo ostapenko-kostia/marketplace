@@ -10,7 +10,6 @@ import LogIn from "./pages/LogIn/LogIn";
 import SignUp from "./pages/SignUp/SignUp";
 import ListingPage from "./pages/ListingPage/ListingPage";
 import RequireAuth from "./hoc/RequireAuth";
-import { useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "./store/store";
 import SearchPage from "./pages/Search/Search";
 
@@ -24,7 +23,6 @@ function App() {
     checkAuth(localStorage.getItem("refresh-token"));
   }, []);
 
-  const queryClient = useQueryClient();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -56,7 +54,7 @@ function App() {
     },
     {
       path: "/search",
-      element: <Layout page={<SearchPage />} />
+      element: <Layout page={<SearchPage />} />,
     },
     {
       path: "*",
@@ -67,13 +65,6 @@ function App() {
 
   return (
     <CategoriesContext.Provider value={{ categories, setCategories }}>
-      <button
-        onClick={() => {
-          queryClient.invalidateQueries();
-        }}
-      >
-        refresh data
-      </button>
       <RouterProvider router={router} />
     </CategoriesContext.Provider>
   );

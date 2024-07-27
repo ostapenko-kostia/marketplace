@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { useForm } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   shownMobile: boolean;
@@ -11,7 +10,6 @@ interface Props {
 export default function Search({ shownMobile, placeholder }: Props) {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   return (
     <search className={`${styles.container} ${shownMobile ? "shown-mobile" : "hidden-mobile"}`}>
       <form
@@ -25,9 +23,6 @@ export default function Search({ shownMobile, placeholder }: Props) {
             pathname: "/search",
             search: params.toString(),
           });
-          setTimeout(() => {
-            queryClient.invalidateQueries({ queryKey: ["searchListings"] });
-          }, 1);
         })}
       >
         <button className={styles.button} type="submit">

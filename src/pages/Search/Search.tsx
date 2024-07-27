@@ -4,9 +4,13 @@ import { useGetListingsByFilters } from "../../hooks/useListings";
 import HomeListingCards from "../../components/HomeListingCards/HomeListingCards";
 import { useSearchParams } from "react-router-dom";
 import { TypeCategories } from "../../interfaces";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Search: FC = () => {
   const [searchParams] = useSearchParams();
+  const queryClient = useQueryClient();
+
+  setTimeout(() => queryClient.invalidateQueries({ queryKey: ["searchListings"] }));
 
   const categories: TypeCategories[] | undefined = searchParams.getAll("categories") as TypeCategories[];
   const minPrice: number | undefined = parseInt(searchParams.get("min_price")!);

@@ -15,7 +15,7 @@ interface Props {
 function Header({ page }: Props) {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
 
-  const { isAuth, user } = useAuthStore();
+  const { isAuth, user, logout } = useAuthStore();
 
   return (
     <>
@@ -41,8 +41,9 @@ function Header({ page }: Props) {
 
           <Search shownMobile={false} placeholder="I am looking for..." />
           {isAuth ? (
-            <div className={styles.welcomeContainer}>
+            <div className={styles.whenAuth}>
               Welcome, {user.firstName}!
+              <button className={styles.logout} onClick={()=>logout()}><i className="fa-solid fa-right-from-bracket"></i></button>
             </div>
           ) : (
             <AuthButtons />

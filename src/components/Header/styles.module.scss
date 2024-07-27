@@ -18,12 +18,27 @@
     gap: 10px;
   }
 }
-.welcomeContainer {
+.whenAuth {
   font-size: 22px;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-align: right;
   @media (max-width: 1350px) {
     font-size: 18px;
+  }
+  .logout {
+    background-color: transparent;
+    border: 1px solid #000;
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
   }
 }
 

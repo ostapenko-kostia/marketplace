@@ -21,13 +21,13 @@ export default class ListingService {
   static async getByFilters(nameP?: string, categoriesP?: TypeCategories[], minPriceP?: number, maxPriceP?: number) {
     interface Params {
       listingName?: string;
-      categories?: TypeCategories[];
+      categories?: string;
       minPrice?: number;
       maxPrice?: number;
     }
     const params: Params = {};
     if (nameP) params.listingName = nameP;
-    if (categoriesP) params.categories = categoriesP;
+    if (categoriesP && categoriesP[0]) params.categories = categoriesP.toString();
     if (minPriceP) params.minPrice = minPriceP;
     if (maxPriceP) params.maxPrice = maxPriceP;
 

@@ -7,24 +7,25 @@ import { API_URL } from "../services";
 interface AuthState {
   user: IUser;
   isAuth: boolean;
-  login: (email: string, password: string, cb: ()=>void) => Promise<void>;
+  login: (email: string, password: string, cb: () => void) => Promise<void>;
   register: (firstName: string, lastName: string, email: string, password: string) => Promise<void>;
   checkAuth: (refresh_token: string | null) => Promise<void>;
+  logout: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: {} as IUser,
-  isAuth: false,
-  login: async (email: string, password: string, cb?: ()=>void) => {
+  isAuth: true,
+  login: async (email: string, password: string, cb?: () => void) => {
     try {
       const response = await AuthService.login(email, password);
       localStorage.setItem("access-token", response.data.access_token);
       localStorage.setItem("refresh-token", response.data.refresh_token);
       set({ user: response.data.userDetails });
       set({ isAuth: true });
-      if (cb) cb()
+      if (cb) cb();
     } catch (error) {
-      alert("Incorrect email or password")
+      alert("Error: Please check email & password or try again later");
     }
   },
   register: async (firstName: string, lastName: string, email: string, password: string) => {
@@ -45,10 +46,16 @@ export const useAuthStore = create<AuthState>((set) => ({
         // console.error(error);
       }
     } else {
-      localStorage.removeItem('access-token')
-      localStorage.removeItem('refresh-token')
+      localStorage.removeItem("access-token");
+      localStorage.removeItem("refresh-token");
       set({ user: {} as IUser });
       set({ isAuth: false });
     }
+  },
+  logout: () => {
+    localStorage.removeItem("access-token");
+    localStorage.removeItem("refresh-token");
+    set({ user: {} as IUser });
+    set({ isAuth: false });
   },
 }));
