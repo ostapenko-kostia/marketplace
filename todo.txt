@@ -1,6 +1,6 @@
-[✅] - S̶e̶a̶r̶c̶h̶ ̶B̶y̶ ̶C̶a̶t̶e̶g̶o̶r̶i̶e̶s̶
-[✅] A̶d̶d̶ ̶L̶o̶g̶o̶u̶t̶
-[?] - Create Listing Logic (active)
+[✅] - Search by categories
+[✅] Add Logout
+[✅] - Create Listing Logic
 [] - Put to favorite UI
 [] - Favorite Listings UI in home
 [] - Delete from favorite

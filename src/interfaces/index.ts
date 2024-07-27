@@ -38,4 +38,7 @@ export interface IListing {
   location: string;
   description: string;
   photo_ref?: string;
+  sellerFirstName: string;
+  sellerLastName: string;
+  sellerEmail: string;
 }

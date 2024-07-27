@@ -49,7 +49,7 @@ function App() {
       element: <Layout page={<SignUp />} />,
     },
     {
-      path: "/listing/:id",
+      path: "/listing",
       element: <Layout page={<ListingPage />} />,
     },
     {

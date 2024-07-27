@@ -24,12 +24,13 @@ export default function Layout({ page }: Props) {
     case "/search":
       document.title = "Quicklist - Search";
       break;
+    case "/listing":
+      document.title = "Quicklist - Listing";
+      break;
     default:
       document.title = "Quicklist - Not Found";
       break;
   }
-
-  if (location.pathname.includes("/listing/")) document.title = "Quicklist - Listing Details";
 
   return (
     <>
