@@ -15,21 +15,6 @@ export default function ListingPage() {
 
   const { data: allListings } = useGetAllListings();
   const listing = allListings?.find((listing) => listing.listing_id === parseInt(id!));
-  // const listing: IListing = {
-  //   category: "Other",
-  //   description: `Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-  //   Similique rerum natus eligendi nulla ipsa nemo nam sequi
-  //   praesentium sunt explicabo fugit totam fuga, necessitatibus,
-  //   rem amet odio laudantium animi exercitationem.`,
-  //   listing_id: parseInt(id!),
-  //   location: "Kyiv, Ukraine",
-  //   name: "Lorem ipsum dolor sit amet",
-  //   price: 1000,
-  //   photo_ref: "/images/img1.png",
-  //   sellerEmail: "123@gmail.com",
-  //   sellerFirstName: "Alex",
-  //   sellerLastName: "Test",
-  // };
 
   return listing ? (
     <section className={style.container}>
