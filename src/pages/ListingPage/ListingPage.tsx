@@ -36,13 +36,13 @@ export default function ListingPage() {
               <b>Location</b>: {listing.location}
             </li>
             <li className={style.infoItem}>
-              <b>Seller`s First Name</b>: {listing.sellerFirstName}
+              <b>Seller`s First Name</b>: {listing.sellerDetails.sellerFirstName}
             </li>
             <li className={style.infoItem}>
-              <b>Seller`s Last Name</b>: {listing.sellerLastName}
+              <b>Seller`s Last Name</b>: {listing.sellerDetails.sellerLastName}
             </li>
             <li className={style.infoItem}>
-              <b>Seller`s Email</b>: {listing.sellerEmail}
+              <b>Seller`s Email</b>: {listing.sellerDetails.sellerEmail}
             </li>
           </ul>
           <div className={style.footer}>{listing.description}</div>

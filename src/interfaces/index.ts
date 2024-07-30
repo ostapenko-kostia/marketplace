@@ -1,13 +1,4 @@
-export type TypeCategories =
-  | "Electronics"
-  | "Fashion"
-  | "Home and Garden"
-  | "Automotive"
-  | "Toys and Games"
-  | "Health and Beauty"
-  | "Sports and Outdoors"
-  | "Other"
-  | null;
+export type TypeCategories = "Electronics" | "Fashion" | "Home and Garden" | "Automotive" | "Toys and Games" | "Health and Beauty" | "Sports and Outdoors" | "Other" | null;
 
 export interface IFilters {
   name?: string;
@@ -38,7 +29,9 @@ export interface IListing {
   location: string;
   description: string;
   photo_ref?: string;
-  sellerFirstName: string;
-  sellerLastName: string;
-  sellerEmail: string;
+  sellerDetails: {
+    sellerFirstName: string;
+    sellerLastName: string;
+    sellerEmail: string;
+  };
 }

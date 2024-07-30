@@ -41,8 +41,16 @@
   font-size: 24px;
   left: 20px;
   top: 20px;
+  z-index: 99;
   @media(max-width: 540px) {
     left: unset;
     right: 20px;
   }
+}
+
+.listingsMy,
+.listingsAll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

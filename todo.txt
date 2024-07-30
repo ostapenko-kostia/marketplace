@@ -1,7 +1,7 @@
 [✅] - Search by categories
 [✅] Add Logout
 [✅] - Listing page
-[?] - Create Listing Logic
+[✅] - Create Listing Logic
 [] - Put to favorite UI
 [] - Favorite Listings UI in home
 [] - Delete from favorite

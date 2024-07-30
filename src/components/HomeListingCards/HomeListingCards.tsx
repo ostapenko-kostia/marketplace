@@ -12,8 +12,8 @@ export default function HomeListingCards({ listings }: Props) {
     <div className={style.container}>
       {listings &&
         listings.map((listing) => (
-          <Link to={`/listing?id=${listing.listing_id}`}>
-            <HomeListingCard key={listing.listing_id} listing={listing} />
+          <Link key={listing.listing_id} to={`/listing?id=${listing.listing_id}`}>
+            <HomeListingCard listing={listing} />
           </Link>
         ))}
     </div>

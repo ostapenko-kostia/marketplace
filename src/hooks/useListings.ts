@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ListingService from "../services/ListingService";
 import { TypeCategories } from "../interfaces";
 
@@ -39,3 +39,21 @@ export function useGetListingsByFilters(name: string | undefined, categories?: T
     staleTime: Infinity,
   });
 }
+
+interface CreateListingContext {
+  callback?: () => void;
+}
+
+export const useCreateListing = (context?: CreateListingContext) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["createListing"],
+    mutationFn: async (formData: FormData) => {
+      return await ListingService.create(formData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      context?.callback?.();
+    },
+  });
+};

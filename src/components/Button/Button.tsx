@@ -1,8 +1,12 @@
-import { PropsWithChildren } from 'react';
-import styles from './styles.module.scss'
+import { FC, PropsWithChildren } from "react";
+import styles from "./styles.module.scss";
 
-export default function Button({children, ...props}: PropsWithChildren) {
-    return (
-        <button {...props} className={styles.button}>{children}</button>
-    )
-}
+const Button: FC<React.HTMLAttributes<HTMLButtonElement & PropsWithChildren>> = ({ children, ...props }) => {
+  return (
+    <button {...props} className={styles.button}>
+      {children}
+    </button>
+  );
+};
+
+export default Button;

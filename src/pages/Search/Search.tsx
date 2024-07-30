@@ -10,12 +10,12 @@ const Search: FC = () => {
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
 
-  setTimeout(() => queryClient.invalidateQueries({ queryKey: ["searchListings"] }));
-
   const categories: TypeCategories[] | undefined = searchParams.getAll("categories") as TypeCategories[];
   const minPrice: number | undefined = parseInt(searchParams.get("min_price")!);
   const maxPrice: number | undefined = parseInt(searchParams.get("max_price")!);
   const name: string | undefined = searchParams.getAll("name")[0];
+
+  setTimeout(() => queryClient.invalidateQueries({ queryKey: ["searchListings"] }));
 
   const { data: searchListings } = useGetListingsByFilters(name, categories, minPrice, maxPrice);
 

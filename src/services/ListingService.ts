@@ -37,4 +37,8 @@ export default class ListingService {
   static async deleteListing(listing_id: number) {
     return await $api.delete("listing/delete", { data: { listing_id } });
   }
+
+  static async create(formData: FormData) {
+    return await $api.post('listing/create', formData);
+  }
 }
