@@ -8,7 +8,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-  if (localStorage.getItem("access-token")) config.headers.Authorization = `Bearer ${localStorage.getItem("access-token")}`;
+  if (localStorage.getItem("access-token") && !config.url?.includes("api/auth")) config.headers.Authorization = `Bearer ${localStorage.getItem("access-token")}`;
   else config.headers.Authorization = "none";
 
   return config;

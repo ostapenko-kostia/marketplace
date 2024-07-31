@@ -5,25 +5,39 @@ import style from "./styles.module.scss";
 
 import Modal from "../../components/Modal/Modal";
 import { useAuthStore } from "../../store/store";
-import { useGetAllListings, useGetMyListings } from "../../hooks/useListings";
+import { useGetAllListings, useGetFavoriteListings, useGetMyListings } from "../../hooks/useListings";
 import Button from "../../components/Button/Button";
 
 export default function Home() {
   const { isAuth } = useAuthStore();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const [visibleAllListingsCount, setVisibleAllListingsCount] = useState<number>(4);
   const [visibleMyListingsCount, setVisibleMyListingsCount] = useState<number>(4);
+  const [visibleFavListingsCount, setVisibleFavlistingsCount] = useState<number>(4);
+  const showMoreAllListings = () => setVisibleAllListingsCount((prevCount) => prevCount + 4);
+  const showMoreMyListings = () => setVisibleMyListingsCount((prevCount) => prevCount + 4);
+  const showMoreFavListings = () => setVisibleFavlistingsCount((prevCount) => prevCount + 4);
+
+  // const allListings:IListing[] = [{
+  //   category: "Other",
+  //   description: "132",
+  //   listing_id: 1,
+  //   location: '123',
+  //   name: 'test',
+  //   price: 1,
+  //   sellerDetails: {
+  //     sellerEmail: "123@gmail.com",
+  //     sellerFirstName: "Alex",
+  //     sellerLastName: "Test",
+  //   },
+  // }]
+
+  // const isAllListingsLoading = false, isAllListingsFetching = false;
 
   const { data: allListings, isLoading: isAllListingsLoading, isFetching: isAllListingsFetching } = useGetAllListings();
   const { data: myListings, isLoading: isMyListingsLoading, isFetching: isMyListingsFetching } = useGetMyListings(isAuth);
-
-  const handleShowMoreAllListings = () => {
-    setVisibleAllListingsCount((prevCount) => prevCount + 4);
-  };
-
-  const handleShowMoreMyListings = () => {
-    setVisibleMyListingsCount((prevCount) => prevCount + 4);
-  };
+  const { data: favoriteListings, isLoading: isFavListingsLoading, isFetching: isFavListingsFetching } = useGetFavoriteListings(isAuth);
 
   return (
     <div className={style.layoutContainer}>
@@ -38,11 +52,32 @@ export default function Home() {
             "Loading..."
           ) : myListings && myListings.length > 0 && isAuth ? (
             <>
-              <HomeListingCards listings={myListings.slice(0, visibleMyListingsCount)} />
-              {visibleMyListingsCount < myListings.length && <Button style={{marginTop: '20px'}} onClick={handleShowMoreMyListings}>See more</Button>}
+              <HomeListingCards favoriteListings={favoriteListings} listings={myListings.slice(0, visibleMyListingsCount)} />
+              {visibleMyListingsCount < myListings.length && (
+                <Button style={{ marginTop: "20px" }} onClick={showMoreMyListings}>
+                  See more
+                </Button>
+              )}
             </>
           ) : (
             "No listings found or you are not authorized  "
+          )}
+        </div>
+        <div className={style.listingsFav}>
+          <h3>Favorite Listings</h3>
+          {isFavListingsFetching || isFavListingsLoading ? (
+            "Loading..."
+          ) : favoriteListings && favoriteListings.length > 0 ? (
+            <>
+              <HomeListingCards favoriteListings={favoriteListings} listings={favoriteListings.slice(0, visibleFavListingsCount)} />
+              {visibleFavListingsCount < favoriteListings.length && (
+                <Button style={{ marginTop: "20px" }} onClick={showMoreFavListings}>
+                  See more
+                </Button>
+              )}
+            </>
+          ) : (
+            "No listings found or you are not authorized"
           )}
         </div>
         <div className={style.listingsAll}>
@@ -51,8 +86,12 @@ export default function Home() {
             "Loading..."
           ) : allListings && allListings.length > 0 ? (
             <>
-              <HomeListingCards listings={allListings.slice(0, visibleAllListingsCount)} />
-              {visibleAllListingsCount < allListings.length && <Button style={{marginTop: '20px'}} onClick={handleShowMoreAllListings}>See more</Button>}
+              <HomeListingCards favoriteListings={favoriteListings} listings={allListings.slice(0, visibleAllListingsCount)} />
+              {visibleAllListingsCount < allListings.length && (
+                <Button style={{ marginTop: "20px" }} onClick={showMoreAllListings}>
+                  See more
+                </Button>
+              )}
             </>
           ) : (
             "No listings found"

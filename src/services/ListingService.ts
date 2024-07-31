@@ -39,6 +39,10 @@ export default class ListingService {
   }
 
   static async create(formData: FormData) {
-    return await $api.post('listing/create', formData);
+    return await $api.post("listing/create", formData);
+  }
+
+  static async putToFavorite(listing_id: number) {
+    return await $api.post("listings/putToFavorite", { listing_id });
   }
 }

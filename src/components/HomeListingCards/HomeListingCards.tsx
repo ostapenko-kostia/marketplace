@@ -1,21 +1,17 @@
-import { Link } from "react-router-dom";
 import { IListing } from "../../interfaces";
 import HomeListingCard from "../HomeListingCard/HomeListingCard";
 import style from "./styles.module.scss";
 
 interface Props {
+  favoriteListings?: IListing[];
   listings?: IListing[];
 }
 
-export default function HomeListingCards({ listings }: Props) {
+export default function HomeListingCards({ favoriteListings, listings }: Props) {
   return (
     <div className={style.container}>
       {listings &&
-        listings.map((listing) => (
-          <Link key={listing.listing_id} to={`/listing?id=${listing.listing_id}`}>
-            <HomeListingCard listing={listing} />
-          </Link>
-        ))}
+        listings.map((listing) => <HomeListingCard key={listing.listing_id} isFavorite={!!favoriteListings?.find((favListing) => favListing.listing_id == listing.listing_id)} listing={listing} />)}
     </div>
   );
 }

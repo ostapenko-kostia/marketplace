@@ -40,6 +40,19 @@ export function useGetListingsByFilters(name: string | undefined, categories?: T
   });
 }
 
+export function useGetFavoriteListings(isEnabled: boolean) {
+  return useQuery({
+    queryKey: ["favoriteListings"],
+    queryFn: async () => {
+      try {
+        return await ListingService.getFavorite();
+      } catch (e) {}
+    },
+    staleTime: Infinity,
+    enabled: isEnabled,
+  });
+}
+
 interface CreateListingContext {
   callback?: () => void;
 }
@@ -57,3 +70,16 @@ export const useCreateListing = (context?: CreateListingContext) => {
     },
   });
 };
+
+export function usePutToFavorite(listing_id: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["putToFavorite"],
+    mutationFn: async () => {
+      return await ListingService.putToFavorite(listing_id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+}
