@@ -27,4 +27,7 @@
   width: 100%;
   align-items: center;
   padding-inline: 20px;
+  @media (max-width: 768px) {
+    padding-inline: 0;
+  }
 }
