@@ -79,6 +79,36 @@ export function usePutToFavorite(listing_id: number) {
       return await ListingService.putToFavorite(listing_id);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["favoriteListings"],
+      });
+    },
+  });
+}
+
+export function useDeleteFromFavorite(listing_id: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["deleteFromFavorite"],
+    mutationFn: async () => {
+      return await ListingService.deleteFromFavorite(listing_id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["favoriteListings"],
+      });
+    },
+  });
+}
+
+export function useDeleteListing(listing_id: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["deleteListing"],
+    mutationFn: async () => {
+      return await ListingService.deleteListing(listing_id);
+    },
+    onSuccess: () => {
       queryClient.invalidateQueries();
     },
   });

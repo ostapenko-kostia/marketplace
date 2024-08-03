@@ -2,7 +2,10 @@
 [✅] - Add Logout
 [✅] - Listing page
 [✅] - Create Listing Logic
-[✅] - Put to favorite UI               (test needed)
-[✅] - Favorite Listings UI in home     (test needed)
-[?] - Delete from favorite
-[] - Editing Listing Info
+[✅] - Put to favorite UI
+[✅] - Favorite Listings UI in home
+[✅] - Delete from favorite
+[✅] - Delete Listings
+[✅] - Home UI redesign
+[?] - Editing Listing Info
+[] - Change Password 

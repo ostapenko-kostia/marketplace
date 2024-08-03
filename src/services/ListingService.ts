@@ -43,6 +43,10 @@ export default class ListingService {
   }
 
   static async putToFavorite(listing_id: number) {
-    return await $api.post("listings/putToFavorite", { listing_id });
+    return await $api.post("listing/putToFavorite", { listing_id });
+  }
+
+  static async deleteFromFavorite(listing_id: number) {
+    return await $api.delete("listing/deleteFromFavorite", { data: { listing_id } });
   }
 }

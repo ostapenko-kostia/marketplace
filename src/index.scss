@@ -53,3 +53,10 @@ body {
 .without-border {
   border: none !important;
 }
+
+.home-card {
+  width: 22vw;
+  @media (max-width: 860px) {
+    width: 100%;
+  }
+}
