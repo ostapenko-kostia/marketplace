@@ -16,8 +16,6 @@ interface Props {
 export default function HomeListingCards({ favoriteListings, listings, isMyListings = false }: Props) {
   const sliderRef = useRef<SwiperRef>(null);
 
-  console.log(sliderRef);
-
   const handlePrev = useCallback(() => {
     if (!sliderRef.current) return;
     sliderRef.current.swiper.slidePrev();
