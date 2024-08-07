@@ -11,10 +11,17 @@ function SignUp() {
   const [lastName, setLastName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const [isSuccess, setIsSucces] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const { register } = useAuthStore();
 
+  const { mutate: signup, isSuccess: isSuccess2 } = useMutation({
+    mutationKey: ["sign-up"],
+    mutationFn: async () => {
+      register(firstName, lastName, email, password);
+      setIsSuccess(isSuccess2);
+    },
+  });
   return (
     <section className={style.container}>
       <h2 className={style.title}>Sign Up</h2>
@@ -23,13 +30,7 @@ function SignUp() {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            const {isSuccess} = useMutation({
-              mutationKey: ["sign-up"],
-              mutationFn: async () => {
-                register(firstName, lastName, email, password);
-              },
-            });
-            setIsSucces(isSuccess);
+            signup();
           }}
         >
           <div className={style.firstNameContainer}>
@@ -57,7 +58,9 @@ function SignUp() {
         </ul>
       </div>
 
-      <Modal title={<h2>Success</h2>} isOpen={isSuccess} close={()=>setIsSucces(false)}>You have successfully registered, please <Link to='/log-in'>log in</Link></Modal>
+      <Modal title={<h2>Success</h2>} isOpen={isSuccess} close={() => setIsSuccess(false)}>
+        You have successfully registered, please <Link to="/log-in">log in</Link>
+      </Modal>
     </section>
   );
 }
