@@ -18,10 +18,6 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import EditPage from "./pages/EditPage";
 import SinglePage from "./pages/SinglePage";
 
-// hi
-
-// lol
-
 function App() {
   const dispatch = useAppDispatch();
   const router = createBrowserRouter([
