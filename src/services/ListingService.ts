@@ -18,7 +18,7 @@ export default class ListingService {
     return (await $api.get<ListingApiResponse>("listing/favorite")).data.listings;
   }
 
-  static async getByFilters(nameP?: string, categoriesP?: TypeCategories[], minPriceP?: number, maxPriceP?: number) {
+  static async getByFilters(nameP?: string | null, categoriesP?: TypeCategories[] | null, minPriceP?: number | null, maxPriceP?: number| null) {
     interface Params {
       listingName?: string;
       categories?: string;
@@ -26,7 +26,7 @@ export default class ListingService {
       maxPrice?: number;
     }
     const params: Params = {};
-    if (nameP) params.listingName = nameP;
+    if (nameP) params.listingName = nameP.toLowerCase();
     if (categoriesP && categoriesP[0]) params.categories = categoriesP.toString();
     if (minPriceP) params.minPrice = minPriceP;
     if (maxPriceP) params.maxPrice = maxPriceP;
@@ -48,5 +48,13 @@ export default class ListingService {
 
   static async deleteFromFavorite(listing_id: number) {
     return await $api.delete("listing/deleteFromFavorite", { data: { listing_id } });
+  }
+
+  static async edit(formData: FormData) {
+    return await $api.put("listing/changeListing", formData);
+  }
+
+  static async contactSeller(recipientEmail: string, listingName: string, message: string) {
+    return await $api.post("listing/contactSeller", { recipientEmail, listingName, message });
   }
 }

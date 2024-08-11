@@ -8,6 +8,7 @@ export interface IFilters {
 }
 
 export interface IUser {
+  profile_pic: string;
   id: number;
   firstName: string;
   lastName: string;
@@ -28,8 +29,9 @@ export interface IListing {
   price: number;
   location: string;
   description: string;
-  photo_ref?: string;
+  photo_ref: string;
   sellerDetails: {
+    sellerProfilePicture: string;
     sellerFirstName: string;
     sellerLastName: string;
     sellerEmail: string;

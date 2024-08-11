@@ -1,61 +1,15 @@
-import { create } from "zustand";
-import { IUser } from "../interfaces";
-import AuthService from "../services/AuthService";
-import axios from "axios";
-import { API_URL } from "../services";
+import { configureStore } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import authReducer from './slices/AuthSlice'
 
-interface AuthState {
-  user: IUser;
-  isAuth: boolean;
-  login: (email: string, password: string, cb: () => void) => Promise<void>;
-  register: (firstName: string, lastName: string, email: string, password: string) => Promise<void>;
-  checkAuth: (refresh_token: string | null) => Promise<void>;
-  logout: () => void;
-}
+export const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
+})
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: {} as IUser,
-  isAuth: false,
-  login: async (email: string, password: string, cb?: () => void) => {
-    try {
-      const response = await AuthService.login(email, password);
-      localStorage.setItem("access-token", response.data.access_token);
-      localStorage.setItem("refresh-token", response.data.refresh_token);
-      set({ user: response.data.userDetails });
-      set({ isAuth: true });
-      if (cb) cb();
-    } catch (error) {
-      alert("Error: Please check email & password or try again later");
-    }
-  },
-  register: async (firstName: string, lastName: string, email: string, password: string) => {
-    try {
-      await AuthService.register(firstName, lastName, email, password);
-    } catch (error) {
-      //   console.error(error);
-    }
-  },
-  checkAuth: async (refresh_token: string | null) => {
-    if (refresh_token) {
-      try {
-        const response = await axios.post(`${API_URL}api/auth/refreshtoken`, { token: refresh_token }, { withCredentials: true });
-        localStorage.setItem("access-token", response.data.access_token);
-        set({ user: response.data.userDetails });
-        set({ isAuth: true });
-      } catch (error) {
-        // console.error(error);
-      }
-    } else {
-      localStorage.removeItem("access-token");
-      localStorage.removeItem("refresh-token");
-      set({ user: {} as IUser });
-      set({ isAuth: false });
-    }
-  },
-  logout: () => {
-    localStorage.removeItem("access-token");
-    localStorage.removeItem("refresh-token");
-    set({ user: {} as IUser });
-    set({ isAuth: false });
-  },
-}));
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

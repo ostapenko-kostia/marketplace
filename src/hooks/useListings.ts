@@ -8,7 +8,9 @@ export function useGetAllListings() {
     queryFn: async () => {
       try {
         return await ListingService.getAll();
-      } catch (e) {}
+      } catch (e) {
+        //
+      }
     },
     staleTime: Infinity,
   });
@@ -21,20 +23,24 @@ export function useGetMyListings(isEnabled: boolean) {
     queryFn: async () => {
       try {
         return await ListingService.getMy();
-      } catch (e) {}
+      } catch (e) {
+        //
+      }
     },
     enabled: isEnabled,
     staleTime: Infinity,
   });
 }
 
-export function useGetListingsByFilters(name: string | undefined, categories?: TypeCategories[] | undefined, min_price?: number | undefined, max_price?: number | undefined) {
+export function useGetListingsByFilters(name: string | null, categories?: TypeCategories[] | null, min_price?: number | null, max_price?: number | null) {
   return useQuery({
     queryKey: ["searchListings"],
     queryFn: async () => {
       try {
         return await ListingService.getByFilters(name, categories, min_price, max_price);
-      } catch (e) {}
+      } catch (e) {
+        //
+      }
     },
     staleTime: Infinity,
   });
@@ -46,18 +52,20 @@ export function useGetFavoriteListings(isEnabled: boolean) {
     queryFn: async () => {
       try {
         return await ListingService.getFavorite();
-      } catch (e) {}
+      } catch (e) {
+        //
+      }
     },
     staleTime: Infinity,
     enabled: isEnabled,
   });
 }
 
-interface CreateListingContext {
+interface callbackContext {
   callback?: () => void;
 }
 
-export const useCreateListing = (context?: CreateListingContext) => {
+export const useCreateListing = (context?: callbackContext) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["createListing"],
@@ -70,6 +78,20 @@ export const useCreateListing = (context?: CreateListingContext) => {
     },
   });
 };
+
+export function useEditListing(cb?: () => void) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["editListing"],
+    mutationFn: async (formData: FormData) => {
+      return await ListingService.edit(formData);
+    },
+    onSuccess: () => {
+      if (cb) cb();
+      queryClient.invalidateQueries();
+    },
+  });
+}
 
 export function usePutToFavorite(listing_id: number) {
   const queryClient = useQueryClient();
@@ -110,6 +132,18 @@ export function useDeleteListing(listing_id: number) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries();
+    },
+  });
+}
+
+export function useContactSeller(cb?: () => void) {
+  return useMutation({
+    mutationKey: ["contactSeller"],
+    mutationFn: async ({ recipientEmail, listingName, message }: { recipientEmail: string; listingName: string; message: string }) => {
+      return await ListingService.contactSeller(recipientEmail, listingName, message);
+    },
+    onSuccess: () => {
+      cb?.();
     },
   });
 }

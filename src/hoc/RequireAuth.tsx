@@ -1,13 +1,13 @@
 import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthStore } from "../store/store";
+import { useAppSelector } from "../store/store";
 
-function RequireAuth({children}: PropsWithChildren) {
-    const {isAuth} = useAuthStore()
+function RequireAuth({ children }: PropsWithChildren) {
+  const { isAuth } = useAppSelector((state) => state.auth);
 
-    if(!isAuth) return <Navigate to='/log-in' />
+  if (!isAuth) return <Navigate to="/log-in" />;
 
-    return children
+  return children;
 }
 
 export default RequireAuth;
