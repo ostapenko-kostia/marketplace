@@ -36,7 +36,7 @@ const Header: FC<HeaderProps> = ({ setIsMenuOpen }) => {
                     <img height={100} width={100} className="rounded-full" src={user?.profile_pic} alt={user?.firstName} />
                     <i className="fa-solid fa-chevron-down text-xs"></i>
                   </button>
-                  <div className={`${isPopupShown ? "flex" : "hidden"} absolute w-32 h-fit z-[1000] top-14 right-[-10px] max-[450px]:right-4 text-black flex-col bg-white border-2 border-solid border-gray`}>
+                  <div className={`${isPopupShown ? "flex" : "hidden"} absolute w-32 z-[1000] top-14 right-[-10px] max-[450px]:right-4 text-black flex-col bg-white border-2 border-solid border-gray`}>
                     <ul className="w-full h-full p-2 [&>li]:border-b-gray [&>li]:text-center [&>li]:border-b-[1px] [&>li]:border-b-solid flex flex-col gap-2">
                       <li className="hover:bg-gray hover:text-white text-nowrap">
                         <Link className="w-full h-full inline-block" to='/my-listings'>My Listings</Link>
