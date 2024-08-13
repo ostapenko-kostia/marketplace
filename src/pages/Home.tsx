@@ -4,6 +4,7 @@ import { useGetAllListings, useGetFavoriteListings, useGetMyListings } from "../
 import Card from "../components/Card";
 import { useRef } from "react";
 import { useAppSelector } from "../store/store";
+import { Link } from "react-router-dom";
 
 function Home() {
   const swiperRef = useRef<SwiperRef>(null);
@@ -23,13 +24,12 @@ function Home() {
             <br />
             delivery on all of you orders.
           </p>
-          <a
+          <Link
             className="inline-block text-primary font-bold hover:bg-bg-color-alt hover:text-white bg-white text-sm py-3 px-7 rounded-3xl max-sm:text-xs max-sm:py-2 max-sm:px-3"
-            target="_blank"
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            to='/search?categories=All+Categories'
           >
             Browse Products
-          </a>
+          </Link>
         </div>
       </div>
       <ul className="list-none flex flex-col items-start">
