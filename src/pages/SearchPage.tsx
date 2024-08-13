@@ -29,7 +29,7 @@ function SearchPage() {
 
   return (
     <section className="mx-auto w-full px-5 py-12 flex items-center flex-col">
-      <h2 className="text-3xl mb-4">Search results for '{name ? name : ""}'</h2>
+      <h2 className="text-3xl mb-4">Search {name && name != "null" ? `results for '${name}'` : "results"}</h2>
       <h3 className="text-lg mb-4">Category: {category ? category : "All Categories"}</h3>
       <div className="w-full mb-4">
         <form
@@ -48,8 +48,8 @@ function SearchPage() {
             })
           )}
         >
-          <input type="number" {...register("min_price", { min: 0 })} required className="max-sm:w-full w-1/3 border-gray border-solid border-[1px] px-5 py-2 rounded-xl" placeholder="Min Price" />
-          <input type="number" {...register("max_price", { min: 0 })} required className="max-sm:w-full w-1/3 border-gray border-solid border-[1px] px-5 py-2 rounded-xl" placeholder="Max Price" />
+          <input type="number" {...register("min_price", { min: 0 })} className="max-sm:w-full w-1/3 border-gray border-solid border-[1px] px-5 py-2 rounded-xl" placeholder="Min Price" />
+          <input type="number" {...register("max_price", { min: 0 })} className="max-sm:w-full w-1/3 border-gray border-solid border-[1px] px-5 py-2 rounded-xl" placeholder="Max Price" />
           <button type="submit" className="bg-primary px-12 py-2 w-fit mx-auto text-lg rounded-xl">
             Apply
           </button>
