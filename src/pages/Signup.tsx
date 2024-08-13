@@ -16,7 +16,7 @@ function Signup() {
       >
         <div className="flex w-full flex-col items-start">
           <label className="mb-2 text-lg" htmlFor="login-photo"><i className="fa-regular fa-image" /> Upload an Image</label>
-          <input required {...register("file")} className="w-full border-gray border-solid border-[1px] px-5 py-2 rounded-xl" type="file" id="login-photo" />
+          <input {...register("file")} className="w-full border-gray border-solid border-[1px] px-5 py-2 rounded-xl" type="file" id="login-photo" />
         </div>
         <div className="flex w-full flex-col items-start">
           <label className="mb-2 text-lg" htmlFor="login-email">
